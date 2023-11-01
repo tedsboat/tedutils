@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Agricosmic.Utilities
@@ -5,6 +6,7 @@ namespace Agricosmic.Utilities
     /// <summary>
     /// Updates a sprite's width based on a percentage
     /// </summary>
+    [ExecuteInEditMode]
     public class SpriteProgressBar : MonoBehaviour
     {
         [Tooltip("The width to use when value = 0")]
@@ -18,7 +20,7 @@ namespace Agricosmic.Utilities
         [SerializeField] private SpriteRenderer _backgroundRenderer;
 
         [Tooltip("The normalized progress to show")]
-        [SerializeField] private float _value;
+        [Range(0, 1)] [SerializeField] private float _value;
 
         /// <summary>
         /// Hide the progress bar
@@ -48,6 +50,11 @@ namespace Agricosmic.Utilities
             var rendererSize = _renderer.size;
             rendererSize.x = Mathf.Lerp(_minWidth, _maxWidth, _value);
             _renderer.size = rendererSize;
+        }
+
+        private void OnValidate()
+        {
+            SetValue(_value);
         }
     }
 }
