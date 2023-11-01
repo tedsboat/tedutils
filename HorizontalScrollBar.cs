@@ -1,4 +1,3 @@
-using Agricosmic.Farm;
 using UnityEngine;
 
 namespace Agricosmic.Utilities
@@ -10,7 +9,6 @@ namespace Agricosmic.Utilities
     /// </summary>
     public class HorizontalScrollBar : MonoBehaviour
     {
-        [SerializeField] private FarmCursor _cursor;
         public float _maxX;
         public float _minX;
         private bool _isClicked = false;
@@ -21,7 +19,7 @@ namespace Agricosmic.Utilities
 
         private void Update()
         {
-            Vector3 localMousePosition = transform.parent.InverseTransformPoint(_cursor.GetMousePosition());
+            Vector3 localMousePosition = transform.parent.InverseTransformPoint(Input.mousePosition);
 
             if (localMousePosition.x > _minX && localMousePosition.x < _maxX && _isClicked)
             {
