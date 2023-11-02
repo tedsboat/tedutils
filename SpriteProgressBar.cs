@@ -47,9 +47,12 @@ namespace Agricosmic.Utilities
         public void SetValue(float value)
         {
             _value = Mathf.Clamp01(value);
-            var rendererSize = _renderer.size;
-            rendererSize.x = Mathf.Lerp(_minWidth, _maxWidth, _value);
-            _renderer.size = rendererSize;
+            if (_renderer != null)
+            {
+                var rendererSize = _renderer.size;
+                rendererSize.x = Mathf.Lerp(_minWidth, _maxWidth, _value);
+                _renderer.size = rendererSize;
+            }
         }
 
         private void OnValidate()
